@@ -70,5 +70,100 @@ S3 host website
         }
     ]
 }
+
+
+acl me change when pipeline
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+
+Sonarqube
+- Sonarqube
+- bin path in system variable
+- wondows folder -- cmd StartSonar.bat
+
+
+
+-=-=-=-=-=-=-==--=-=-=-=-=-=-==--=-=-=-=-=-=-==--=-=-=-=-=-=-==--=-=-=-=-=-=-==-
+Pipeline
+
+Create Bucket
+ACL enabled
+Object Writer
+Uncheck block all public access
+Create Buucket
+
+CodePipeline
+Create
+- New serverice role or existing
+- Source Provider - GithubVersion1 
+Connect to github
+Confirm 
+Repo
+Branch
+Change detection options - Github Webhooks
+
+
+build Provider - AWS CodeBuild
+Region same as bucket
+CLICK ON ***Create project
+ - Managed Image
+ -OS - Ubuntu
+Runtime - Standard
+Image - 7.0
+Service role - you know
+Use buildspec file
+untick cloudwatch
+
+
+Build Type - single Build
+Deploy Provider -S3
+Bucket 
+No object key
+Instead Extract the file before deploy
+
+
+Create pipelineeee
+
+SUCCEEDS ALL 3 steps
+Click on deplyed s3
+
+Permission policy
+
+
+-=-=-=-=-=-=-=-=---=-=-=-=--=-=-=-==-=-=-=-
+Terrraform
+
+terraform { 
+    required_providers {
+        aws = {
+            source = "hashicorp/aws" 
+            version = "~> 4.0"
+        }
+    }
+}
+
+provider "aws" {
+    region = "ap-south-1"
+    access_key="AKIAZZJD4A7Z73CCUOW5"
+    secret_key="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"
+}
+
+resource "aws_instance" "public_instance" {
+    ami           = "ami-0287a05f0ef0e9d9a" 
+    instance_type = "t2.micro"
+}
+
+
+././././.
+Mine
+
+
+provider "aws" {	region = "us-east-1"	access_key = ""	secret_key = ""}resource "aws_instance" "Ubuntu" {	ami = ""	instance_type = "t2.micro"}
+
+./././.
+S3
+provider ka same
+resource "aws_s3_bucket" "my_bucket" {
+bucket = "darshilbbbb2343"
+}
 
