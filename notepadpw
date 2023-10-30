@@ -1,0 +1,74 @@
+AWS LAMBDA 1 - python - an img added -S3
+
+Create an S3 bucket
+Create lambda function
+ - use blueprint
+ - Get S3 obj in python option
+ - create a new role
+ - select  s3 bicket 
+ - Event type - allobject create events
+Make changes in code
+Upload obj in S3
+Monitor in Lambda and oprn CloudWatch Log
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+AWS Lambda 2 - Dynamo Db 
+
+Create Dynamo Table
+ - enter patition key and sort key -(value)
+ - add items in table
+
+(Role already created)
+Create IAM role with dynamo full access 
+ - service lambda
+ - search dynao - full access
+
+Create Lambda function
+ - blueprint use karele - dynamo python
+ - add role existing 
+Write this code:::
+
+import boto3
+import json
+
+dynamodb_client = boto3.resource('dynamodb')
+table = dynamodb_client.Table('darshiltable1')
+
+def lambda_handler(event,context):
+    try:
+        response = table.put_item(Item=event)
+        return table.scan()
+    except:
+        raise
+
+
+
+Test - change json
+Save and test and seeeeee
+
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+S3 host website
+- predesigned ooorrrr
+ - Do not block public access while creating bucket
+ - Enable static website hosting
+ - change bucketpolicy - generator - * - getObject
+ - in json add /*
+
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "PublicReadGetObject",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::bucket1thadomal/*"
+        }
+    ]
+}
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
